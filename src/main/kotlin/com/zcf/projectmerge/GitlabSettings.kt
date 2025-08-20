@@ -11,8 +11,8 @@ import com.intellij.openapi.application.ApplicationManager
 class GitlabSettings : PersistentStateComponent<GitlabSettings.State> {
     class State {
         var token: String? = null
-        var baseUrl: String = "http://code.jms.com" // 不带结尾斜杠
-        var topGroup: String = "project"            // 一级目录路径
+        var baseUrl: String = "" // 不带结尾斜杠
+        var topGroup: String = ""            // 一级目录路径
         var debugLog: Boolean = false
     }
 
