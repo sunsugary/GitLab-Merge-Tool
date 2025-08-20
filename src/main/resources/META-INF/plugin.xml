@@ -1,0 +1,28 @@
+<idea-plugin>
+    <id>com.example.gitlab.merge</id>
+    <name>GitLab Merge Helper</name>
+    <version>1.0</version>
+    <vendor email="you@example.com">Your Name</vendor>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <actions>
+        <action id="com.zcf.projectmerge.GitlabMergeAction"
+                class="com.zcf.projectmerge.GitlabMergeAction"
+                text="GitLab Merge Tool"
+                description="Select subgroup, projects and merge branches via GitLab API">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+    </actions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable instance="com.zcf.projectmerge.GitlabSettingsConfigurable"
+                                 displayName="GitLab Settings"
+                                 groupId="tools"/>
+        <notificationGroup
+                id="GitLab Merge Tool"
+                displayType="BALLOON"
+        />
+    </extensions>
+
+</idea-plugin>
