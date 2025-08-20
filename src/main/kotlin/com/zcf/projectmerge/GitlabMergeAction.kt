@@ -5,7 +5,6 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.progress.ProgressIndicator
 import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.progress.Task
-import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.Messages
 
 class GitlabMergeAction : AnAction("GitLab Merge") {
@@ -18,16 +17,37 @@ class GitlabMergeAction : AnAction("GitLab Merge") {
         if (token.isNullOrBlank()) {
             Messages.showErrorDialog(
                 ideaProject,
-                "请在 设置 → 工具 → GitLab 设置 中配置访问令牌",
+                "请在 设置 → 工具 → GitLab 设置 中配置Access Token",
                 "配置错误"
             )
             return
         }
 
-        val api = GitlabApi(token, settings.baseUrl)
+        val baseUrl = settings.baseUrl
+
+        if (baseUrl.isBlank()) {
+            Messages.showErrorDialog(
+                ideaProject,
+                "请在 设置 → 工具 → GitLab 设置 中配置Base Url",
+                "配置错误"
+            )
+            return
+        }
+
+        val topGroup = settings.topGroup
+        if (topGroup.isBlank()) {
+            Messages.showErrorDialog(
+                ideaProject,
+                "请在 设置 → 工具 → GitLab 设置 中配置Top Group",
+                "配置错误"
+            )
+            return
+        }
+
+        val api = GitlabApi(token, baseUrl)
 
         // 显示对话框
-        val dialog = GitlabMergeDialog(api, settings.topGroup)
+        val dialog = GitlabMergeDialog(api, topGroup)
         if (!dialog.showAndGet()) return
 
         val selectedProjects = dialog.selectedProjects

@@ -15,7 +15,6 @@ class GitlabApi(private val token: String, baseUrl: String) {
 
     private fun request(path: String, method: String = "GET", body: String? = null): String {
         val url = "$api$path"
-        log("$method $url\nbody=$body")
         val conn = URL(url).openConnection() as HttpURLConnection
         conn.requestMethod = method
         conn.setRequestProperty("PRIVATE-TOKEN", token)
@@ -30,7 +29,6 @@ class GitlabApi(private val token: String, baseUrl: String) {
         } catch (_: Exception) {
             conn.errorStream?.bufferedReader()?.readText() ?: ""
         }
-        log("<-- $code $text")
         if (code !in 200..299) throw RuntimeException("GitLab API $code: $text")
         return text
     }
