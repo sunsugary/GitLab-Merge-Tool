@@ -78,8 +78,16 @@ class GitlabMergeDialog(private val api: GitlabApi, private val topGroup: String
         })
     }
 
+    private val settings = GitlabSettings.getInstance()
 
-    private val targetBranch = "uat"
+    // 从配置取 targetBranch，用逗号分隔后转成数组
+    val targetBranches = settings.targetBranch
+        .split(",")               // 按逗号切分
+        .map { it.trim() }        // 去掉前后空格
+        .filter { it.isNotEmpty() }
+
+    // 下拉框
+    private val targetBranchComboBox = ComboBox(targetBranches.toTypedArray())
 
     val selectedProjects: List<Map<String, Any?>>
         get() = mutableListOf<Map<String, Any?>>().apply {
@@ -165,7 +173,8 @@ class GitlabMergeDialog(private val api: GitlabApi, private val topGroup: String
         val bottomPanel = JPanel()
         bottomPanel.add(JLabel("Source Branch:"))
         bottomPanel.add(sourceBranchComboBox)
-        bottomPanel.add(JLabel("Target Branch: $targetBranch"))
+        bottomPanel.add(JLabel("Target Branch:"))
+        bottomPanel.add(targetBranchComboBox)
         panel.add(bottomPanel, BorderLayout.SOUTH)
 
         return panel

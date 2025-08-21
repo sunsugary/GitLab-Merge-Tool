@@ -1,8 +1,8 @@
 <idea-plugin>
     <id>com.example.gitlab.merge</id>
     <name>GitLab Merge Helper</name>
-    <version>1.0</version>
-    <vendor email="you@example.com">Your Name</vendor>
+    <version>2.0</version>
+    <vendor email="sunsugary@163.com">sunsugary</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 

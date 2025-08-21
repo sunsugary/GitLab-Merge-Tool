@@ -12,6 +12,7 @@ class GitlabSettingsConfigurable : Configurable {
     private val tokenField = JPasswordField()
     private val baseUrlField = JTextField()
     private val topGroupField = JTextField()
+    private val targetBranchField = JTextField()
     private val debugCheck = JCheckBox("Enable API debug log")
 
     private var panel: JPanel? = null
@@ -38,11 +39,13 @@ class GitlabSettingsConfigurable : Configurable {
         topGroupField.text = settings.topGroup
         tokenField.text = settings.token ?: ""
         debugCheck.isSelected = settings.debugLog
+        targetBranchField.text = settings.targetBranch
 
         addRow("Base URL:", baseUrlField, 0)
         addRow("Top Group:", topGroupField, 1)
         addRow("Access Token:", tokenField, 2)
-        c.gridy = 3; c.gridx = 1; panel!!.add(debugCheck, c)
+        addRow("Target Branch:", targetBranchField, 3)
+        c.gridy = 4; c.gridx = 1; panel!!.add(debugCheck, c)
 
         return panel as JPanel
     }
@@ -51,12 +54,14 @@ class GitlabSettingsConfigurable : Configurable {
         baseUrlField.text.trimEnd('/') != settings.baseUrl ||
                 topGroupField.text.trim('/') != settings.topGroup ||
                 String(tokenField.password) != (settings.token ?: "") ||
+                targetBranchField.text != settings.targetBranch ||
                 debugCheck.isSelected != settings.debugLog
 
     override fun apply() {
         settings.baseUrl = baseUrlField.text
         settings.topGroup = topGroupField.text
         settings.token = String(tokenField.password)
+        settings.targetBranch = targetBranchField.text
         settings.debugLog = debugCheck.isSelected
     }
 
@@ -64,6 +69,7 @@ class GitlabSettingsConfigurable : Configurable {
         baseUrlField.text = settings.baseUrl
         topGroupField.text = settings.topGroup
         tokenField.text = settings.token ?: ""
+        targetBranchField.text = settings.targetBranch
         debugCheck.isSelected = settings.debugLog
     }
 

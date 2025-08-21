@@ -14,12 +14,17 @@ class GitlabSettings : PersistentStateComponent<GitlabSettings.State> {
         var baseUrl: String = "" // 不带结尾斜杠
         var topGroup: String = ""            // 一级目录路径
         var debugLog: Boolean = false
+        var targetBranch: String = "uat"
     }
 
     private var state = State()
 
     override fun getState(): State = state
     override fun loadState(state: State) { this.state = state }
+
+    var targetBranch: String
+        get() = state.targetBranch
+        set(v) { state.targetBranch = v }
 
     var token: String?
         get() = state.token
