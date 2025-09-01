@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.zcf.projectMerge"
-version = "3.0-SNAPSHOT"
+version = "4.0.213-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -14,9 +14,9 @@ repositories {
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-    version.set("2024.1.7")
+    version.set("2023.1.3")
     type.set("IU") // Target IDE Platform
-
+    updateSinceUntilBuild.set(false)
     plugins.set(listOf(/* Plugin Dependencies */))
 }
 
@@ -31,7 +31,7 @@ tasks {
     }
 
     patchPluginXml {
-        sinceBuild.set("211")
+        sinceBuild.set("213")
     }
 
     signPlugin {

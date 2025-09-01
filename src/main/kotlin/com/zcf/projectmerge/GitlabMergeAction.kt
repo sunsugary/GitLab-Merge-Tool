@@ -58,7 +58,8 @@ class GitlabMergeAction : AnAction("GitLab Merge") {
 
         // 统一源分支
         val sourceBranch = dialog.sourceBranchComboBox.editor.item.toString().trim()
-        val targetBranch = "uat"
+        val targetBranch = dialog.targetBranchComboBox.selectedItem?.toString()?.trim()
+
 
         if (sourceBranch.isBlank()) {
             Messages.showWarningDialog(ideaProject, "源分支不能为空", "配置错误")

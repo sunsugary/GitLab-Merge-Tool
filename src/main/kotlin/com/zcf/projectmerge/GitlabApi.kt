@@ -55,7 +55,7 @@ class GitlabApi(private val token: String, baseUrl: String) {
     }
 
     // 创建 MR
-    fun createMergeRequest(projectId: String, source: String, target: String, title: String? = null): Int {
+    fun createMergeRequest(projectId: String, source: String, target: String? = "uat", title: String? = null): Int {
         val t = title ?: "Merge $source into $target"
         val body = """{"source_branch":"$source","target_branch":"$target","title":"$t"}"""
         val json = request("/projects/$projectId/merge_requests", method = "POST", body = body)

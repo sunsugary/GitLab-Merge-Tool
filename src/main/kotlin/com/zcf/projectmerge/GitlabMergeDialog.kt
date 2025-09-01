@@ -87,7 +87,7 @@ class GitlabMergeDialog(private val api: GitlabApi, private val topGroup: String
         .filter { it.isNotEmpty() }
 
     // 下拉框
-    private val targetBranchComboBox = ComboBox(targetBranches.toTypedArray())
+    val targetBranchComboBox = ComboBox(targetBranches.toTypedArray())
 
     val selectedProjects: List<Map<String, Any?>>
         get() = mutableListOf<Map<String, Any?>>().apply {
